@@ -70,7 +70,17 @@
 
     <!-- Name of a subclass of com.android.launcher3.AppFilter used to
          filter the activities shown in the launcher. Can be empty. -->
+<<<<<<< HEAD
     <string name="app_filter_class" translatable="false">com.android.launcher3.SuperNexusAppFilter</string>
+=======
+    <string name="app_filter_class" translatable="false">com.google.android.apps.nexuslauncher.CustomAppFilter</string>
+
+    <!-- Name of an icon provider class. -->
+    <string name="icon_provider_class" translatable="false">com.google.android.apps.nexuslauncher.CustomIconProvider</string>
+
+    <!-- Name of a drawable factory class. -->
+    <string name="drawable_factory_class" translatable="false">com.google.android.apps.nexuslauncher.CustomDrawableFactory</string>
+>>>>>>> a535f291d... Add custom icon pack support
 
     <!-- List of package names that com.android.launcher3.action.LAUNCH
      should be targeting. Can be empty. -->
