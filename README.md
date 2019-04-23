@@ -2,7 +2,7 @@
 Pixelated is based on Rootless Pixel Launcher By Amir Zaidi
 with one twist it no longer requirs android android studio to build as I've added the playstore framework form android studio as part of my custom android os based on LineageOS 14.1 Nougat.
 
-This is the Nuogat version Rootless Pixel Launcher By Amir Zaidi so be patience ad my next version on my rom that well based on LineageOS 15.1 Orea.
+This is the Nougat version Rootless Pixel Launcher By Amir Zaidi so be patience ad my next version on my rom that well based on LineageOS 15.1 Orea.
 
 ## Links
 Prebuilt PlayStore Framework: https://github.com/LightningFastRom/android_framework_prebuilt_gms
