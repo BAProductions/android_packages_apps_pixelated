@@ -13,13 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 LOCAL_PATH := $(call my-dir)
-
 #
 # Build app code.
 #
 include $(CLEAR_VARS)
+
+$(call inherit-product-if-exists, frameworks/gms/android.mk)
 
 LOCAL_MODULE_TAGS := optional
 
@@ -45,6 +45,7 @@ LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)/protos/
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
     --extra-packages android.support.v7.recyclerview \
+	--extra-packages com.google.android.gms \
 
 LOCAL_SDK_VERSION := current
 LOCAL_MIN_SDK_VERSION := 21
