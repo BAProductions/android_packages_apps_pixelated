@@ -15,19 +15,46 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <SwitchPreference
-            android:key="pref_show_predictions"
-            android:title="@string/title_app_suggestions"
-            android:defaultValue="true"
-            android:persistent="true"
-    />
-
-    <SwitchPreference
-            android:key="pref_allowRotation"
-            android:title="@string/allow_rotation_title"
-            android:defaultValue="@bool/allow_rotation"
-            android:persistent="true"
-    />
-
+	<SwitchPreference
+			android:key="pref_allowRotation"
+			android:title="@string/allow_rotation_title"
+			android:defaultValue="@bool/allow_rotation"
+			android:persistent="true"
+	/>
+	<PreferenceCategory android:title="@string/catgory_title_general">
+		<SwitchPreference
+				android:key="pref_show_discovery_bounce"
+				android:title="@string/title_discovery_bounce"
+				android:defaultValue="true"
+				android:persistent="true"
+		/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="@string/catgory_title_homescreen">
+		<SwitchPreference
+				android:key="pref_show_google_search"
+				android:title="@string/title_google_search"
+				android:defaultValue="true"
+				android:persistent="true"
+		/>
+		<SwitchPreference
+				android:key="pref_show_google_naw"
+				android:title="@string/title_google_now"
+				android:defaultValue="true"
+				android:persistent="true"
+		/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="@string/catgory_title_app_drawer">
+		<SwitchPreference
+				android:key="pref_show_app_search"
+				android:title="@string/title_app_search"
+				android:defaultValue="true"
+				android:persistent="true"
+		/>
+		<SwitchPreference
+				android:key="pref_show_predictions"
+				android:title="@string/title_app_suggestions"
+				android:defaultValue="false"
+				android:persistent="true"
+		/>
+	</PreferenceCategory>
 </PreferenceScreen>
