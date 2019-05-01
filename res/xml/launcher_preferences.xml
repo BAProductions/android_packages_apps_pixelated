@@ -19,7 +19,7 @@
     <SwitchPreference
             android:key="pref_show_predictions"
             android:title="@string/title_app_suggestions"
-            android:defaultValue="true"
+            android:defaultValue="@bool/show_predictions"
             android:persistent="true"
     />
 
