@@ -40,7 +40,7 @@ public class l implements Handler.Callback, b
     public static l getInstance(final Context context) {
         synchronized (l.LOCK) {
             if (l.bf == null) {
-                (l.bf = new l(context.getApplicationContext())).aI(Utilities.getPrefs(context).getBoolean("pref_show_predictions", true));
+                (l.bf = new l(context.getApplicationContext())).aI(Utilities.getPrefs(context).getBoolean("pref_show_predictions", false));
             }
             return l.bf;
         }

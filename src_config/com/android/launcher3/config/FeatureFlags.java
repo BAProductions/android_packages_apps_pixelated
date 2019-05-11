@@ -28,7 +28,7 @@ public final class FeatureFlags {
     public static boolean LAUNCHER3_LEGACY_WORKSPACE_DND = false;
     public static boolean LAUNCHER3_LEGACY_FOLDER_ICON = false;
     public static boolean LAUNCHER3_USE_SYSTEM_DRAG_DRIVER = true;
-    public static boolean LAUNCHER3_DISABLE_PINCH_TO_OVERVIEW = false;
+    public static boolean LAUNCHER3_DISABLE_PINCH_TO_OVERVIEW = true;
     public static boolean LAUNCHER3_ALL_APPS_PULL_UP = true;
 
     // Feature flag to enable moving the QSB on the 0th screen of the workspace.
@@ -36,7 +36,7 @@ public final class FeatureFlags {
     // When enabled the all-apps icon is not added to the hotseat.
     public static final boolean NO_ALL_APPS_ICON = true;
     // When enabled fling down gesture on the first workspace triggers search.
-    public static final boolean PULLDOWN_SEARCH = false;
+    public static final boolean PULLDOWN_SEARCH = true;
     // When enabled the status bar may show dark icons based on the top of the wallpaper.
-    public static final boolean LIGHT_STATUS_BAR = false;
+    public static final boolean LIGHT_STATUS_BAR = true;
 }

@@ -1,0 +1,43 @@
+<!--
+
+    Copyright (C) 2017 The LineageOS Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+	<!-- Setting Category Strings -->
+	<string name="cat_look_feel_title">Look &amp; Feel</string>
+	
+	<!-- Setting Strings -->
+	<!-- Icon Pack -->
+    <string name="icon_pack">Icon Pack</string>
+    <string name="icon_pack_summary">Select an icon Pack</string>
+	
+	<!-- App Suggestions -->
+	<string name="title_app_suggestions">Display app suggestions</string>
+    <string name="summary_app_suggestions">At the top of your All Apps list</string>
+	
+	<!-- Google Now -->
+	<string name="title_show_google_app">Display %1$s</string>
+    <string name="pref_show_google_now_summary">@string/msg_minus_one_on_left</string>
+    <string name="msg_minus_one_on_left">To the left of the main Home screen</string>
+	<string name="title_google_app">Google app</string>
+	
+	<!-- Theme selection -->
+    <string name="theme_title">Theme</string>
+    <string name="theme_automatic">Automatic</string>
+    <string name="theme_default">Default</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_transparent">Transparent</string>
+</resources>

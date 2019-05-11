@@ -18,13 +18,26 @@ package com.android.launcher3;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.database.ContentObserver;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
+import android.util.Log;
 import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
+import android.preference.TwoStatePreference;
+import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.provider.Settings.System;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 
 /**
  * Settings activity for Launcher. Currently implements the following setting: Allow rotation
@@ -33,7 +46,6 @@ public class SettingsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new LauncherSettingsFragment())
@@ -43,23 +55,24 @@ public class SettingsActivity extends Activity {
     /**
      * This fragment shows the launcher preferences.
      */
-    public static class LauncherSettingsFragment extends PreferenceFragment {
+    public static class LauncherSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
         private SystemDisplayRotationLockObserver mRotationLockObserver;
+		private Context mContext;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             getPreferenceManager().setSharedPreferencesName(LauncherFiles.SHARED_PREFERENCES_KEY);
             addPreferencesFromResource(R.xml.launcher_preferences);
-
+			
             // Setup allow rotation preference
             Preference rotationPref = findPreference(Utilities.ALLOW_ROTATION_PREFERENCE_KEY);
             if (getResources().getBoolean(R.bool.allow_rotation)) {
                 // Launcher supports rotation by default. No need to show this setting.
                 getPreferenceScreen().removePreference(rotationPref);
             } else {
-                ContentResolver resolver = getActivity().getContentResolver();
+                ContentResolver resolver = /Users/BAproduction/GitHub/android_packages_apps_pixelated/src/com/android/launcher3/Utilities.javagetActivity().getContentResolver();
                 mRotationLockObserver = new SystemDisplayRotationLockObserver(rotationPref, resolver);
 
                 // Register a content observer to listen for system setting changes while
@@ -72,9 +85,28 @@ public class SettingsActivity extends Activity {
                 mRotationLockObserver.onChange(true);
                 rotationPref.setDefaultValue(Utilities.getAllowRotationDefaultValue(getActivity()));
             }
+			
+			/**
+			* Warning: Dont Remove this is unless you know how to remove app Predictions with out losing home overview setting button,
+			* Removing this can cause a bug to appre & frankly I find this options rather annoying.
+			* Disable PredictionsBug to avoid a huge bugs
+			*/
+			Preference predictionsPref = findPreference(Utilities.SHOW_PREDICTIONS_PREF);
+			predictionsPref.setOnPreferenceChangeListener(this);
+			getPreferenceScreen().removePreference(predictionsPref);
         }
-
-        @Override
+		
+		@Override
+        public void onResume() {
+            super.onResume();
+        }
+		
+		@Override
+        public boolean onPreferenceChange(Preference preference, final Object newValue) {
+			return false;
+		}
+        
+		@Override
         public void onDestroy() {
             if (mRotationLockObserver != null) {
                 getActivity().getContentResolver().unregisterContentObserver(mRotationLockObserver);

@@ -146,9 +146,66 @@ public final class Utilities {
     public static final Executor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(
             CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE,
             TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+	
+	/**
+	 * Warning: Dont Remove this is unless you know how to remove app Predictions with out losing home overview setting button,
+	 * Removing this can cause a bug to appre & frankly I find this options rather annoying.
+	 * Disable PredictionsBug to avoid a huge bugs
+	 */
+	public static final String SHOW_PREDICTIONS_PREF = "pref_show_predictions"
+	
+	public static final String ICON_PACK_PREF = "pref_icon_pack";
+	
+	// Todo: Add Ability Hide Google Search like in the LineageOS Default Launcher(Trebuchet)
+	public static final String ENABLE_MINUS_ONE_PREF = "pref_enable_minus_one";
+	
+	// Todo: Add Ability Hide App Search In App Drawer like in the LineageOS Default Launcher(Trebuchet)
+	public static final String SHOW_APP_SEARCH = "pref_show_app_search";
+	
+	public static final String SMARTSPACE_PREF = "pref_smartspace";
+	
+	public static final String APP_VERSION_PREF = "about_app_version";
+	
+	private static final String BRIDGE_TAG = "tag_bridge";
+	
+	public static final String GOOGLE_APP = "com.google.android.googlequicksearchbox";
+	
+	// Todo: Add Theme Support
+	public static final String THEME_OVERRIDE_KEY = "pref_override_theme";
 
+    /* public static int getThemeHints(Context context, int wallpaperHints) {
+        String hints = getPrefs(context).getString(THEME_OVERRIDE_KEY, "");
+        if (TextUtils.isEmpty(hints)) {
+            return wallpaperHints;
+        }
+        return Integer.valueOf(hints);
+    } */
+	
+	/*private String themeHints() {
+        return Utilities.getPrefs(this).getString(Utilities.THEME_OVERRIDE_KEY, "");
+    }*/
+	
+	/*@Override
+    public void overrideTheme(boolean isDark, boolean supportsDarkText, boolean isTransparent) {
+        int flags = Utilities.getDevicePrefs(this).getInt(NexusLauncherOverlay.PREF_PERSIST_FLAGS, 0);
+        int orientFlag = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 16 : 8;
+        boolean useGoogleInOrientation = (orientFlag & flags) != 0;
+        supportsDarkText &= Utilities.ATLEAST_NOUGAT;
+        if (useGoogleInOrientation && isDark) {
+            setTheme(R.style.GoogleSearchLauncherThemeDark);
+        } else if (useGoogleInOrientation && supportsDarkText) {
+            setTheme(R.style.GoogleSearchLauncherThemeDarkText);
+        } else if (useGoogleInOrientation && isTransparent) {
+            setTheme(R.style.GoogleSearchLauncherThemeTransparent);
+        } else if (useGoogleInOrientation) {
+            setTheme(R.style.GoogleSearchLauncherTheme);
+        } else {
+            super.overrideTheme(isDark, supportsDarkText, isTransparent);
+        }
+    }*/
+	
     public static final String ALLOW_ROTATION_PREFERENCE_KEY = "pref_allowRotation";
-
+	
     public static boolean isPropertyEnabled(String propertyName) {
         return Log.isLoggable(propertyName, Log.VERBOSE);
     }

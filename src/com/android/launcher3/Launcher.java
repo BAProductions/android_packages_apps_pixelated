@@ -28,6 +28,13 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.SearchManager;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
+import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
+import android.preference.TwoStatePreference;
 import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
@@ -86,6 +93,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.launcher3.SettingsActivity;
 import com.android.launcher3.DropTarget.DragObject;
 import com.android.launcher3.LauncherSettings.Favorites;
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate;
@@ -222,7 +230,7 @@ public class Launcher extends Activity
             }
         }
     };
-
+	
     @Thunk Workspace mWorkspace;
     private View mLauncherView;
     @Thunk DragLayer mDragLayer;
@@ -319,7 +327,7 @@ public class Launcher extends Activity
     // launcher. Since there is no callback for when the activity has finished launching, enable
     // the press state and keep this reference to reset the press state when we return to launcher.
     private BubbleTextView mWaitingForResume;
-
+	
     protected static HashMap<String, CustomAppWidget> sCustomAppWidgets =
             new HashMap<String, CustomAppWidget>();
 
@@ -388,15 +396,14 @@ public class Launcher extends Activity
             Trace.beginSection("Launcher-onCreate");
         }
 
-        mLauncherCallbacks = new SuperLauncherCallbacks(this);
+		mLauncherCallbacks = new SuperLauncherCallbacks(this);
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.preOnCreate();
         }
-
-        super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);
 
         LauncherAppState app = LauncherAppState.getInstance();
-
+	
         // Load configuration-specific DeviceProfile
         mDeviceProfile = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE ?
@@ -478,7 +485,6 @@ public class Launcher extends Activity
             mLauncherCallbacks.onCreate(savedInstanceState);
         }
     }
-
     @Override
     public void onExtractedColorsChanged() {
         loadExtractedColorsAndColorItems();
@@ -512,7 +518,10 @@ public class Launcher extends Activity
             newSystemUiFlags &= ~(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         if (newSystemUiFlags != oldSystemUiFlags) {
-            getWindow().getDecorView().setSystemUiVisibility(newSystemUiFlags);
+            final int systemUiFlags = newSystemUiFlags;
+            runOnUiThread(() -> {
+                getWindow().getDecorView().setSystemUiVisibility(systemUiFlags);
+            });
         }
     }
 
