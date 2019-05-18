@@ -36,9 +36,9 @@
 	<string name="summary_show__app_search">Show app search in app drawer</string>
 	
 	<!-- Pinch To OverViewer -->
-	<string name="title_pinch_to_overview">Show Quick Search Bar</string>
-	<string name="summary_pinch_to_overview">Turn On iOS pulldown search</string>
-
+	<string name="title_pinch_to_overview">Enabled Pinch To OverViewer</string>
+	<string name="summary_pinch_to_overview">Access OverViewer by pintching with two fingure insted of long pressing</string>
+	
 	<!-- Lighht Status Bar -->
 	<string name="title_light_status_bar">Disable Light Status Bar</string>
 	<string name="summary_light_status_bar">Dont Know What This Does Yet?</string>
@@ -46,7 +46,7 @@
 	<!-- Pulldown Search -->
 	<string name="title_pulldown_search">Enable Pulldown Search </string>
 	<string name="summary_pulldown_search">Turn On iOS Style Pulldown search</string>
-
+	
 	<!-- All Apps Icons -->
 	<string name="title_show_all_apps_icon">Show All Apps Icons</string>
 	<string name="summary_show_all_apps_icon">Show The All Apps Icon for use who like the look of the LineageOS Trebuchet Launcher but want the Pixel Launcher Shortcuts as well</string>
