@@ -219,3 +219,18 @@ Seems to be a Google App problem, every launcher with the new feed is suffering 
 
 ### Huawei/Honor crash
 For a reason I can’t diagnose because I don’t have a Huawei device, recent Huawei phones seem to crash on launch when the user hasn’t given the launcher storage permissions. If this happens to you go into your system settings and grant the storage permission manually.
+
+### Todo: 
+* Add launcher layouts selection functionality with  some premade like Pixel Launcher layout, Trebuchet Launcher layout, TouchWiz Launcher layout, OnePlus Launcher layout  & ios layout where all apps are adding to the some screen & app drawer is removed and the google now page is replaced with a widget page, pulldown search like a group toggle witch toggle a bunch of options at once for a quick themeing.
+* Fix function for toggling QSB Like in the LineageOS Default Launcher(Trebuchet) 
+* Fix function for toggling App drawer search Like in the LineageOS Default Launcher(Trebuchet) 
+* Fix function for toggling All Apps Icone for the LineageOS Default Launcher(Trebuchet) look
+* Add theme selection functionality 
+* Fix Function for toggling Pulldown Search 
+* Fix Function for toggling Pinch To Overview
+* Add about section in launcher_preferences.xml
+* Add device profile fo the Samsung Galaxy Tab 4 10.1, Samsung Galaxy Tab 4 8.0 & Samsung Galaxy S3NEO to device_profiles.xml
+* Get launcher to build without GMS framework if posable in both Android studio & any  Android rom source  as system apps using the raw source
+* Port app notification badge & add ios theme to app notification badge to Nougat version of my luncher if posable
+* Port icon shape  to Nougat version of my luncher if posable
+* Port as meany to functions to the Nougat version of my luncher as posable form amirzaidi Rootless Pixel Launcher Oreo branch
