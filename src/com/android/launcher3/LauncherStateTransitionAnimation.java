@@ -86,12 +86,12 @@ public class LauncherStateTransitionAnimation {
 
     /**
      * animation used for all apps and widget tray when
-     *{@link FeatureFlags#LAUNCHER3_ALL_APPS_PULL_UP} is {@code false}
+     *{@link Utilities.toggleAllAppsPullUp(mLauncher)} is {@code false}
      */
     public static final int CIRCULAR_REVEAL = 0;
     /**
      * animation used for all apps and not widget tray when
-     *{@link FeatureFlags#LAUNCHER3_ALL_APPS_PULL_UP} is {@code true}
+     *{@link Utilities.toggleAllAppsPullUp(mLauncher)} is {@code true}
      */
     public static final int PULLUP = 1;
 
@@ -170,7 +170,7 @@ public class LauncherStateTransitionAnimation {
             }
         };
         int animType = CIRCULAR_REVEAL;
-        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP) {
+        if (Utilities.toggleAllAppsPullUp(mLauncher)) {
             animType = PULLUP;
         }
         // Only animate the search bar if animating from spring loaded mode back to all apps
@@ -210,7 +210,7 @@ public class LauncherStateTransitionAnimation {
         if (fromState == Launcher.State.APPS || fromState == Launcher.State.APPS_SPRING_LOADED
                 || mAllAppsController.isTransitioning()) {
             int animType = CIRCULAR_REVEAL;
-            if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP) {
+            if (Utilities.toggleAllAppsPullUp(mLauncher)) {
                 animType = PULLUP;
             }
             startAnimationToWorkspaceFromAllApps(fromWorkspaceState, toWorkspaceState,
@@ -255,7 +255,7 @@ public class LauncherStateTransitionAnimation {
         playCommonTransitionAnimations(toWorkspaceState, fromView, toView,
                 animated, initialized, animation, layerViews);
         if (!animated || !initialized) {
-            if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP &&
+            if (Utilities.toggleAllAppsPullUp(mLauncher) &&
                     toWorkspaceState == Workspace.State.NORMAL_HIDDEN) {
                 mAllAppsController.finishPullUp();
             }
@@ -703,7 +703,7 @@ public class LauncherStateTransitionAnimation {
         playCommonTransitionAnimations(toWorkspaceState, fromView, toView,
                 animated, initialized, animation, layerViews);
         if (!animated || !initialized) {
-            if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP &&
+            if (Utilities.toggleAllAppsPullUp(mLauncher) &&
                     fromWorkspaceState == Workspace.State.NORMAL_HIDDEN) {
                 mAllAppsController.finishPullDown();
             }

@@ -1,0 +1,54 @@
+<!--
+ 
+ Copyright (C) 2017 The LineageOS Project
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+<resources>
+	<!-- Setting Category Strings -->
+	<string name="cat_look_feel_title">Look &amp; Feel</string>
+	
+	<!-- App Suggestions -->
+	<string name="title_app_suggestions">Display app suggestions</string>
+	<string name="summary_app_suggestions">At the top of your All Apps list</string>
+	
+	<!-- Setting Strings -->
+	<!-- Icon Pack -->
+	<string name="icon_pack">Icon Pack</string>
+	<string name="icon_pack_summary">Select an icon Pack</string>
+	
+	<!-- Google Quick Search Bar -->
+	<string name="title_show_qsb">Show Quick Search Bar</string>
+	<string name="summary_show_qsb">Show Quick Search Bar</string>
+	
+	<!-- App Drawer Search -->
+	<string name="title_show__app_search">Show App Drawer Search</string>
+	<string name="summary_show__app_search">Show app search in app drawer</string>
+	
+	<!-- Pinch To OverViewer -->
+	<string name="title_pinch_to_overview">Show Quick Search Bar</string>
+	<string name="summary_pinch_to_overview">Turn On iOS pulldown search</string>
+
+	<!-- Lighht Status Bar -->
+	<string name="title_light_status_bar">Disable Light Status Bar</string>
+	<string name="summary_light_status_bar">Dont Know What This Does Yet?</string>
+	
+	<!-- Pulldown Search -->
+	<string name="title_pulldown_search">Enable Pulldown Search </string>
+	<string name="summary_pulldown_search">Turn On iOS Style Pulldown search</string>
+
+	<!-- All Apps Icons -->
+	<string name="title_show_all_apps_icon">Show All Apps Icons</string>
+	<string name="summary_show_all_apps_icon">Show The All Apps Icon for use who like the look of the LineageOS Trebuchet Launcher but want the Pixel Launcher Shortcuts as well</string>
+	
+</resources>

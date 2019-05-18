@@ -16,6 +16,7 @@
 
 package com.android.launcher3.dynamicui;
 
+import android.content.Context;
 import android.app.IntentService;
 import android.app.WallpaperManager;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import com.android.launcher3.LauncherProvider;
 import com.android.launcher3.LauncherSettings;
 import com.android.launcher3.R;
 import com.android.launcher3.config.FeatureFlags;
+import com.android.launcher3.Utilities;
 
 /**
  * Extracts colors from the wallpaper, and saves results to {@link LauncherProvider}.
@@ -36,8 +38,10 @@ public class ColorExtractionService extends IntentService {
 
     /** The fraction of the wallpaper to extract colors for use on the hotseat. */
     private static final float HOTSEAT_FRACTION = 1f / 4;
+	
+	private static Context mContext;
 
-    public ColorExtractionService() {
+	public ColorExtractionService() {
         super("ColorExtractionService");
     }
 
@@ -62,8 +66,8 @@ public class ColorExtractionService extends IntentService {
                     .clearFilters()
                     .generate();
             extractedColors.updateHotseatPalette(hotseatPalette);
-
-            if (FeatureFlags.LIGHT_STATUS_BAR) {
+			
+            if (Utilities.toggleLightStatueBar(mContext)) {
                 int statusBarHeight = getResources()
                         .getDimensionPixelSize(R.dimen.status_bar_height);
                 Palette statusBarPalette = Palette.from(wallpaper)

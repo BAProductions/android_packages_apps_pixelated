@@ -56,7 +56,7 @@ public abstract class BaseContainerView extends FrameLayout
     public BaseContainerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP && this instanceof AllAppsContainerView) {
+        if (Utilities.toggleAllAppsPullUp(getContext()) && this instanceof AllAppsContainerView) {
             mBaseDrawable = new ColorDrawable();
         } else {
             TypedArray a = context.obtainStyledAttributes(attrs,
@@ -113,29 +113,22 @@ public abstract class BaseContainerView extends FrameLayout
         Context context = getContext();
         Launcher launcher = Launcher.getLauncher(context);
 
-        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP &&
+        if (Utilities.toggleAllAppsPullUp(getContext()) &&
                 this instanceof AllAppsContainerView &&
                 !launcher.getDeviceProfile().isVerticalBarLayout()) {
             mContainerPaddingLeft = mContainerPaddingRight = 0;
             mContainerPaddingTop = mContainerPaddingBottom = 0;
         } else {
-            DeviceProfile grid = launcher.getDeviceProfile();
-            int[] padding = grid.getContainerPadding(context);
-            mContainerPaddingLeft = padding[0] + grid.edgeMarginPx;
-            mContainerPaddingRight = padding[1] + grid.edgeMarginPx;
-            if (!launcher.getDeviceProfile().isVerticalBarLayout()) {
-                mContainerPaddingTop = mContainerPaddingBottom = grid.edgeMarginPx;
-            } else {
-                mContainerPaddingTop = mContainerPaddingBottom = 0;
-            }
+            mContainerPaddingLeft = mContainerPaddingRight = 0;
+            mContainerPaddingTop = mContainerPaddingBottom = 0;
         }
 
         mRevealDrawable = new InsetDrawable(mBaseDrawable,
                 mContainerPaddingLeft, mContainerPaddingTop, mContainerPaddingRight,
                 mContainerPaddingBottom);
         mRevealView.setBackground(mRevealDrawable);
-        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP && this instanceof AllAppsContainerView) {
-            // Skip updating the content background
+        if (Utilities.toggleAllAppsPullUp(getContext()) && this instanceof AllAppsContainerView) {
+            mContent.setBackground(mRevealDrawable);
         } else {
             mContent.setBackground(mRevealDrawable);
         }

@@ -185,9 +185,9 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         mLayoutManager = mAdapter.getLayoutManager();
         mItemDecoration = mAdapter.getItemDecoration();
         DeviceProfile grid = mLauncher.getDeviceProfile();
-        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP && !grid.isVerticalBarLayout()) {
-            mRecyclerViewBottomPadding = 0;
-            setPadding(0, 0, 0, 0);
+        if (Utilities.toggleAllAppsPullUp(context) && !grid.isVerticalBarLayout()) {
+           mRecyclerViewBottomPadding =
+                    res.getDimensionPixelSize(R.dimen.all_apps_list_bottom_padding);
         } else {
             mRecyclerViewBottomPadding =
                     res.getDimensionPixelSize(R.dimen.all_apps_list_bottom_padding);
@@ -249,11 +249,19 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         if (mSearchBarController != null) {
             throw new RuntimeException("Expected search bar controller to only be set once");
         }
-        mSearchBarController = searchController;
+		mSearchBarController = searchController;
         mSearchBarController.initialize(mApps, mSearchInput, mLauncher, this);
         mAdapter.setSearchController(mSearchBarController);
     }
-
+	
+	public void removeSearchBarController(AllAppsSearchBarController searchController) {
+        if (mSearchBarController != null) {
+            throw new RuntimeException("Expected search bar controller to only be set once");
+        }
+		mSearchBarController = searchController;
+        mSearchBarController.initialize(mApps, mSearchInput, mLauncher, this);
+        mAdapter.setSearchController(mSearchBarController);
+    }
     /**
      * Scrolls this list view to the top.
      */
@@ -365,7 +373,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         mAppsRecyclerView.preMeasureViews(mAdapter);
         mAdapter.setIconFocusListener(focusedItemDecorator.getFocusListener());
 
-        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP) {
+        if (Utilities.toggleAllAppsPullUp(getContext())) {
             getRevealView().setVisibility(View.VISIBLE);
             getContentView().setVisibility(View.VISIBLE);
             getContentView().setBackground(null);
@@ -384,7 +392,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
 
         DeviceProfile grid = mLauncher.getDeviceProfile();
         grid.updateAppsViewNumCols();
-        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP) {
+        if (Utilities.toggleAllAppsPullUp(getContext())) {
             if (mNumAppsPerRow != grid.inv.numColumns ||
                     mNumPredictedAppsPerRow != grid.inv.numColumns) {
                 mNumAppsPerRow = grid.inv.numColumns;
@@ -409,7 +417,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
             return;
         }
 
-        // --- remove START when {@code FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP} is enabled. ---
+        // --- remove START when {@code Utilities.toggleAllAppsPullUp(getContext()) is enabled. ---
 
         // Update the number of items in the grid before we measure the view
         // TODO: mSectionNamesMargin is currently 0, but also account for it,
@@ -433,7 +441,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
             mApps.setNumAppsPerRow(mNumAppsPerRow, mNumPredictedAppsPerRow, mergeAlgorithm);
         }
 
-        // --- remove END when {@code FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP} is enabled. ---
+        // --- remove END when {@code Utilities.toggleAllAppsPullUp(getContext())} is enabled. ---
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -476,7 +484,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         mAppsRecyclerView.setClipToPadding(false);
 
         DeviceProfile grid = mLauncher.getDeviceProfile();
-        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP) {
+        if (Utilities.toggleAllAppsPullUp(getContext())) {
             if (!grid.isVerticalBarLayout()) {
                 MarginLayoutParams mlp = (MarginLayoutParams) mAppsRecyclerView.getLayoutParams();
 

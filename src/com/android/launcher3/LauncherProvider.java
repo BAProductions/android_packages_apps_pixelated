@@ -63,6 +63,7 @@ import com.android.launcher3.util.ManagedProfileHeuristic;
 import com.android.launcher3.util.NoLocaleSqliteContext;
 import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.Thunk;
+import com.android.launcher3.Utilities;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -811,7 +812,7 @@ public class LauncherProvider extends ContentProvider {
                     convertShortcutsToLauncherActivities(db);
                 case 26:
                     // QSB was moved to the grid. Clear the first row on screen 0.
-                    if (FeatureFlags.QSB_ON_FIRST_SCREEN &&
+                    if (Utilities.showQsbWidget(mContext) &&
                             !LauncherDbUtils.prepareScreenZeroToHostQsb(db)) {
                         break;
                     }

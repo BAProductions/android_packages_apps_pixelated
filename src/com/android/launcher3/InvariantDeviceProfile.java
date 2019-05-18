@@ -29,6 +29,7 @@ import android.view.WindowManager;
 import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.config.ProviderConfig;
 import com.android.launcher3.util.Thunk;
+import com.android.launcher3.Utilities;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -39,7 +40,9 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class InvariantDeviceProfile {
-
+	
+	private static  Context mContext;
+	
     // This is a static that we use for the default icon size on a 4/5-inch phone
     private static float DEFAULT_ICON_SIZE_DP = 60;
 
@@ -311,7 +314,7 @@ public class InvariantDeviceProfile {
     }
 
     public int getAllAppsButtonRank() {
-        if (ProviderConfig.IS_DOGFOOD_BUILD && FeatureFlags.NO_ALL_APPS_ICON) {
+        if (ProviderConfig.IS_DOGFOOD_BUILD && Utilities.showAllAppsIcon(mContext)) {
             throw new IllegalAccessError("Accessing all apps rank when all-apps is disabled");
         }
         return numHotseatIcons / 2;
