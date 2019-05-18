@@ -16,6 +16,7 @@
 
 package com.android.launcher3.util;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.InvariantDeviceProfile;
 import com.android.launcher3.ShortcutAndWidgetContainer;
 import com.android.launcher3.config.FeatureFlags;
+import com.android.launcher3.Utilities;
 
 import java.util.Arrays;
 
@@ -71,7 +73,9 @@ public class FocusLogic {
     // Matrix related constant.
     public static final int EMPTY = -1;
     public static final int PIVOT = 100;
-
+	
+	private static Context mContext;
+	
     /**
      * Returns true only if this utility class handles the key code.
      */
@@ -200,7 +204,7 @@ public class FocusLogic {
         ViewGroup hotseatParent = hotseatLayout.getShortcutsAndWidgets();
 
         boolean isHotseatHorizontal = !dp.isVerticalBarLayout();
-        boolean moreIconsInHotseatThanWorkspace = !FeatureFlags.NO_ALL_APPS_ICON &&
+        boolean moreIconsInHotseatThanWorkspace = !Utilities.showAllAppsIcon(mContext) &&
                 (isHotseatHorizontal
                         ? hotseatLayout.getCountX() > iconLayout.getCountX()
                         : hotseatLayout.getCountY() > iconLayout.getCountY());

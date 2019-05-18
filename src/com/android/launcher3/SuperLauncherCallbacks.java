@@ -8,9 +8,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
+import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.allapps.AllAppsSearchBarController;
 import com.android.launcher3.logging.UserEventDispatcher;
 import com.android.launcher3.util.ComponentKey;
+import com.android.launcher3.Hotseat;
+import com.android.launcher3.Utilities;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -19,6 +22,7 @@ import java.util.List;
 
 public class SuperLauncherCallbacks implements LauncherCallbacks, SharedPreferences.OnSharedPreferenceChangeListener {
     public static Launcher mLauncher;
+	public static Hotseat mHotseat;
     private com.android.launcher3.reflectionevents.a cF;
     public static com.android.launcher3.reflection.l cD;
 
@@ -50,11 +54,11 @@ public class SuperLauncherCallbacks implements LauncherCallbacks, SharedPreferen
     @Override
     public void onStart() {
 
-    }
+	}
 
     @Override
     public void onStop() {
-
+		
     }
 
     @Override
@@ -250,5 +254,8 @@ public class SuperLauncherCallbacks implements LauncherCallbacks, SharedPreferen
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         mLauncher.tryAndUpdatePredictedApps();
+		//mLauncher.setupAppSearch();
+		//mLauncher.setupQSB();
+		//Utilities();
     }
 }

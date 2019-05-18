@@ -63,7 +63,6 @@ public abstract class AllAppsSearchBarController
         mApps = apps;
         mCb = cb;
         mLauncher = launcher;
-
         mInput = input;
         mInput.addTextChangedListener(this);
         mInput.setOnEditorActionListener(this);

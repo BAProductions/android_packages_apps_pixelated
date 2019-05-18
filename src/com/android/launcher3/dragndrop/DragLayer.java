@@ -176,9 +176,9 @@ public class DragLayer extends InsettableFrameLayout {
     public boolean dispatchKeyEvent(KeyEvent event) {
         return mDragController.dispatchKeyEvent(event) || super.dispatchKeyEvent(event);
     }
-
+	
     public void onAccessibilityStateChanged(boolean isAccessibilityEnabled) {
-        mPinchListener = FeatureFlags.LAUNCHER3_DISABLE_PINCH_TO_OVERVIEW || isAccessibilityEnabled
+        mPinchListener = Utilities.togglePinchToOverview(mLauncher) || isAccessibilityEnabled
                 ? null : new PinchToOverviewListener(mLauncher);
     }
 
@@ -298,7 +298,7 @@ public class DragLayer extends InsettableFrameLayout {
             return true;
         }
 
-        if (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP && mAllAppsController.onInterceptTouchEvent(ev)) {
+        if (Utilities.toggleAllAppsPullUp(getContext()) && mAllAppsController.onInterceptTouchEvent(ev)) {
             mActiveController = mAllAppsController;
             return true;
         }

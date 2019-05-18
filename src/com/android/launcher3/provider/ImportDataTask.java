@@ -133,7 +133,7 @@ public class ImportDataTask {
                 .getSerialNumberForUser(UserHandleCompat.myUserHandle()));
 
         boolean createEmptyRowOnFirstScreen = false;
-        if (FeatureFlags.QSB_ON_FIRST_SCREEN) {
+        if (Utilities.showQsbWidget(mContext)) {
             try (Cursor c = mContext.getContentResolver().query(mOtherFavoritesUri, null,
                     // get items on the first row of the first screen
                     "profileId = ? AND container = -100 AND screen = ? AND cellY = 0",
@@ -305,7 +305,7 @@ public class ImportDataTask {
 
         LongArrayMap<Object> hotseatItems = GridSizeMigrationTask.removeBrokenHotseatItems(mContext);
         int myHotseatCount = LauncherAppState.getInstance().getInvariantDeviceProfile().numHotseatIcons;
-        if (!FeatureFlags.NO_ALL_APPS_ICON) {
+        if (!Utilities.showAllAppsIcon(mContext)) {
             myHotseatCount--;
         }
         if (hotseatItems.size() < myHotseatCount) {

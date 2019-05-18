@@ -40,12 +40,13 @@ import com.android.launcher3.dynamicui.ExtractedColors;
 import com.android.launcher3.logging.UserEventDispatcher;
 import com.android.launcher3.userevent.nano.LauncherLogProto;
 import com.android.launcher3.userevent.nano.LauncherLogProto.Target;
+import com.android.launcher3.Utilities;
 
 public class Hotseat extends FrameLayout
         implements UserEventDispatcher.LaunchSourceProvider {
 
     private CellLayout mContent;
-
+	private static  Context mContext;
     private Launcher mLauncher;
 
     @ViewDebug.ExportedProperty(category = "launcher")
@@ -122,11 +123,11 @@ public class Hotseat extends FrameLayout
 
         resetLayout();
     }
-
+	
     void resetLayout() {
         mContent.removeAllViewsInLayout();
 
-        if (!FeatureFlags.NO_ALL_APPS_ICON) {
+        if (!Utilities.showAllAppsIcon(getContext())) {
             // Add the Apps button
             Context context = getContext();
             int allAppsButtonRank = mLauncher.getDeviceProfile().inv.getAllAppsButtonRank();

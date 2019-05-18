@@ -142,5 +142,21 @@
         launcher:hotseatIconSize="72"
         launcher:defaultLayoutId="@xml/default_workspace_5x6"
         />
+		
+	<profile
+        launcher:name="Galexy Tab 4 10.1"
+        launcher:minWidthDps="1527"
+        launcher:minHeightDps="2527"
+        launcher:numRows="7"
+        launcher:numColumns="7"
+        launcher:numFolderRows="6"
+        launcher:numFolderColumns="6"
+        launcher:minAllAppsPredictionColumns="4"
+        launcher:iconSize="100"
+        launcher:iconTextSize="20.0"
+        launcher:numHotseatIcons="7"
+        launcher:hotseatIconSize="72"
+        launcher:defaultLayoutId="@xml/default_workspace_5x6"
+        />
 
 </profiles>

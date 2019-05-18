@@ -84,6 +84,7 @@ import com.android.launcher3.util.VerticalFlingDetector;
 import com.android.launcher3.util.WallpaperOffsetInterpolator;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 import com.android.launcher3.widget.PendingAddWidgetInfo;
+import com.android.launcher3.Utilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -178,6 +179,8 @@ public class Workspace extends PagedView
 
     private SpringLoadedDragController mSpringLoadedDragController;
     private float mOverviewModeShrinkFactor;
+	
+	private static  Context mContext;
 
     // State variable that indicates whether the pages are small (ie when you're
     // in all apps or customize mode)
@@ -585,12 +588,13 @@ public class Workspace extends PagedView
      * @param qsb an exisitng qsb to recycle or null.
      */
     public void bindAndInitFirstWorkspaceScreen(View qsb) {
-        if (!FeatureFlags.QSB_ON_FIRST_SCREEN) {
+        if (!Utilities.showQsbWidget(getContext())) {
             return;
         }
         // Add the first page
         CellLayout firstPage = insertNewWorkspaceScreen(Workspace.FIRST_SCREEN_ID, 0);
-        if (FeatureFlags.PULLDOWN_SEARCH) {
+	
+        if (Utilities.togglePulldownSearch(getContext())) {
             firstPage.setOnTouchListener(new VerticalFlingDetector(mLauncher) {
                 // detect fling when touch started from empty space
                 @Override
@@ -1024,7 +1028,7 @@ public class Workspace extends PagedView
             long id = mWorkspaceScreens.keyAt(i);
             CellLayout cl = mWorkspaceScreens.valueAt(i);
             // FIRST_SCREEN_ID can never be removed.
-            if ((!FeatureFlags.QSB_ON_FIRST_SCREEN || id > FIRST_SCREEN_ID)
+            if ((!Utilities.showQsbWidget(getContext())  || id > FIRST_SCREEN_ID)
                     && cl.getShortcutsAndWidgets().getChildCount() == 0) {
                 removeScreens.add(id);
             }
@@ -2160,7 +2164,7 @@ public class Workspace extends PagedView
             page.setContentDescription(getPageDescription(pageNo));
 
             // No custom action for the first page.
-            if (!FeatureFlags.QSB_ON_FIRST_SCREEN || pageNo > 0) {
+            if (!Utilities.showQsbWidget(getContext())  || pageNo > 0) {
                 if (mPagesAccessibilityDelegate == null) {
                     mPagesAccessibilityDelegate = new OverviewScreenAccessibilityDelegate(this);
                 }
@@ -2426,7 +2430,7 @@ public class Workspace extends PagedView
                 // Don't show the message if we are dropping on the AllApps button and the hotseat
                 // is full
                 boolean isHotseat = mLauncher.isHotseatLayout(dropTargetLayout);
-                if (mTargetCell != null && isHotseat && !FeatureFlags.NO_ALL_APPS_ICON) {
+                if (mTargetCell != null && isHotseat && !Utilities.showAllAppsIcon(getContext())) {
                     Hotseat hotseat = mLauncher.getHotseat();
                     if (mLauncher.getDeviceProfile().inv.isAllAppsButtonRank(
                             hotseat.getOrderInHotseat(mTargetCell[0], mTargetCell[1]))) {

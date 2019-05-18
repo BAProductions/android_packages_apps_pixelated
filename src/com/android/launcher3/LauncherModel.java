@@ -77,6 +77,7 @@ import com.android.launcher3.util.Preconditions;
 import com.android.launcher3.util.StringFilter;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.util.ViewOnDrawExecutor;
+import com.android.launcher3.Utilities;
 
 import java.lang.ref.WeakReference;
 import java.net.URISyntaxException;
@@ -1561,7 +1562,7 @@ public class LauncherModel extends BroadcastReceiver
             long containerIndex = item.screenId;
             if (item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
                 // Return early if we detect that an item is under the hotseat button
-                if (!FeatureFlags.NO_ALL_APPS_ICON &&
+                if (!Utilities.showAllAppsIcon(mContext) &&
                         profile.isAllAppsButtonRank((int) item.screenId)) {
                     Log.e(TAG, "Error loading shortcut into hotseat " + item
                             + " into position (" + item.screenId + ":" + item.cellX + ","
@@ -1623,7 +1624,7 @@ public class LauncherModel extends BroadcastReceiver
                 if (item.screenId == Workspace.FIRST_SCREEN_ID) {
                     // Mark the first row as occupied (if the feature is enabled)
                     // in order to account for the QSB.
-                    screen.markCells(0, 0, countX + 1, 1, FeatureFlags.QSB_ON_FIRST_SCREEN);
+                    screen.markCells(0, 0, countX + 1, 1, Utilities.showQsbWidget(mContext));
                 }
                 occupied.put(item.screenId, screen);
             }

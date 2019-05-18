@@ -146,64 +146,76 @@ public final class Utilities {
     public static final Executor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(
             CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE,
             TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
-	
+
 	/**
 	 * Warning: Dont Remove this is unless you know how to remove app Predictions with out losing home overview setting button,
 	 * Removing this can cause a bug to appre & frankly I find this options rather annoying.
 	 * Disable PredictionsBug to avoid a huge bugs
 	 */
-	public static final String SHOW_PREDICTIONS_PREF = "pref_show_predictions"
+    public static final String SHOW_PREDICTIONS_PREF = "pref_show_predictions";
 	
+	// Icon Pack Support Preference
+	// Todo:Still Buggy
 	public static final String ICON_PACK_PREF = "pref_icon_pack";
 	
-	// Todo: Add Ability Hide Google Search like in the LineageOS Default Launcher(Trebuchet)
-	public static final String ENABLE_MINUS_ONE_PREF = "pref_enable_minus_one";
+	// Pinch To Overview Preference
+	// Todo: Add Ability to toggle pinch to overview
+	public static final String PINCH_TO_OVERVIEW = "pref_pinch_to_overview";
 	
+	public static boolean togglePinchToOverview(Context context) {
+         return FeatureFlags.LAUNCHER3_DISABLE_PINCH_TO_OVERVIEW; 
+		 //getPrefs(context).getBoolean(DISABLE_PINCH_TO_OVERVIEW, FeatureFlags.LAUNCHER3_DISABLE_PINCH_TO_OVERVIEW);
+    }
+	// Light Status Bar  Preference
+	// Todo: Add Ability to toggle between Light Statue Bar
+	public static final String LIGHT_STATUS_BAR = "pref_light_status_bar";
+	
+	public static boolean toggleLightStatueBar(Context context) {
+         return FeatureFlags.LIGHT_STATUS_BAR; 
+		 //getPrefs(context).getBoolean(LIGHT_STATUS_BAR, FeatureFlags.LIGHT_STATUS_BAR);
+    }
+	
+	// Pulldown Search Preference
+	// Todo: Add Ability to toggle Pull Down Search Like Apple's iOS
+	public static final String PULLDOWN_SEARCH = "pref_pulldown_search";
+	
+	public static boolean togglePulldownSearch(Context context) {
+         return FeatureFlags.PULLDOWN_SEARCH; 
+		 //getPrefs(context).getBoolean(PULLDOWN_SEARCH, FeatureFlags.PULLDOWN_SEARCH);
+    }
+	
+	// All Apps Icon Preference Show All App Icon Like LineageOS Default Launcher(Trebuchet)
+	// Todo: Need Reworking?
+	public static final String SHOW_ALL_APPS_PULL_UP = "pref_all_apps_pull_up";
+	
+	public static boolean toggleAllAppsPullUp(Context context) {
+         return getPrefs(context).getBoolean(SHOW_ALL_APPS_ICON, FeatureFlags.NO_ALL_APPS_ICON);
+    }
+	
+	public static final String SHOW_ALL_APPS_ICON = "pref_show_all_apps_icon";
+	
+	public static boolean showAllAppsIcon(Context context) {
+         return !getPrefs(context).getBoolean(SHOW_ALL_APPS_ICON, FeatureFlags.NO_ALL_APPS_ICON);
+    }
+	
+	// Show App Search Preference
 	// Todo: Add Ability Hide App Search In App Drawer like in the LineageOS Default Launcher(Trebuchet)
 	public static final String SHOW_APP_SEARCH = "pref_show_app_search";
 	
-	public static final String SMARTSPACE_PREF = "pref_smartspace";
+	public static boolean showAppSearch(Context context) {
+         return getPrefs(context).getBoolean(SHOW_APP_SEARCH, true);
+    }
 	
-	public static final String APP_VERSION_PREF = "about_app_version";
+	// Show Google Search Preference
+	// Todo: Add Ability Hide Google Search like in the LineageOS Default Launcher(Trebuchet)
+    public static final String SHOW_QSB = "pref_show_qsb";
 	
-	private static final String BRIDGE_TAG = "tag_bridge";
+	public static boolean showQsbWidget(Context context) {
+         return  FeatureFlags.QSB_ON_FIRST_SCREEN;
+		 //getPrefs(context.getApplicationContext()).getBoolean(SHOW_QSB, FeatureFlags.QSB_ON_FIRST_SCREEN);
+    }
 	
-	public static final String GOOGLE_APP = "com.google.android.googlequicksearchbox";
-	
-	// Todo: Add Theme Support
-	public static final String THEME_OVERRIDE_KEY = "pref_override_theme";
-
-    /* public static int getThemeHints(Context context, int wallpaperHints) {
-        String hints = getPrefs(context).getString(THEME_OVERRIDE_KEY, "");
-        if (TextUtils.isEmpty(hints)) {
-            return wallpaperHints;
-        }
-        return Integer.valueOf(hints);
-    } */
-	
-	/*private String themeHints() {
-        return Utilities.getPrefs(this).getString(Utilities.THEME_OVERRIDE_KEY, "");
-    }*/
-	
-	/*@Override
-    public void overrideTheme(boolean isDark, boolean supportsDarkText, boolean isTransparent) {
-        int flags = Utilities.getDevicePrefs(this).getInt(NexusLauncherOverlay.PREF_PERSIST_FLAGS, 0);
-        int orientFlag = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 16 : 8;
-        boolean useGoogleInOrientation = (orientFlag & flags) != 0;
-        supportsDarkText &= Utilities.ATLEAST_NOUGAT;
-        if (useGoogleInOrientation && isDark) {
-            setTheme(R.style.GoogleSearchLauncherThemeDark);
-        } else if (useGoogleInOrientation && supportsDarkText) {
-            setTheme(R.style.GoogleSearchLauncherThemeDarkText);
-        } else if (useGoogleInOrientation && isTransparent) {
-            setTheme(R.style.GoogleSearchLauncherThemeTransparent);
-        } else if (useGoogleInOrientation) {
-            setTheme(R.style.GoogleSearchLauncherTheme);
-        } else {
-            super.overrideTheme(isDark, supportsDarkText, isTransparent);
-        }
-    }*/
-	
+	// Allow Rotation Preference
     public static final String ALLOW_ROTATION_PREFERENCE_KEY = "pref_allowRotation";
 	
     public static boolean isPropertyEnabled(String propertyName) {
@@ -883,6 +895,11 @@ public final class Utilities {
                 LauncherFiles.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 
+    public static SharedPreferences getDevicePrefs(Context context) {
+        return context.getSharedPreferences(
+                LauncherFiles.DEVICE_PREFERENCES_KEY, Context.MODE_PRIVATE);
+    }
+	
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static boolean isPowerSaverOn(Context context) {
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);

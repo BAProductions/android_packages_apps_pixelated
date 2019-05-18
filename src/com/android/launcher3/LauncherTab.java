@@ -30,7 +30,7 @@ public class LauncherTab {
 
     public LauncherTab(Launcher launcher) {
         mLauncher = launcher;
-        mLauncherClient = new LauncherClient(launcher, new LauncherClientCallbacksAdapter(launcher.getWorkspace()), true);
+        mLauncherClient = new LauncherClient(launcher, new LauncherClientCallbacksAdapter(launcher.getWorkspace()), false);
 
         launcher.setLauncherOverlay(new LauncherOverlays());
     }

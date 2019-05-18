@@ -38,6 +38,8 @@ public class OverviewScreenAccessibilityDelegate extends AccessibilityDelegate {
 
     private final SparseArray<AccessibilityAction> mActions = new SparseArray<>();
     private final Workspace mWorkspace;
+	
+	private Context mContext;
 
     public OverviewScreenAccessibilityDelegate(Workspace workspace) {
         mWorkspace = workspace;
@@ -84,13 +86,12 @@ public class OverviewScreenAccessibilityDelegate extends AccessibilityDelegate {
     @Override
     public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(host, info);
-
         int index = mWorkspace.indexOfChild(host);
         if (index < mWorkspace.getChildCount() - 1) {
             info.addAction(mActions.get(MOVE_FORWARD));
         }
 
-        int startIndex = mWorkspace.numCustomPages() + (FeatureFlags.QSB_ON_FIRST_SCREEN ? 1 : 0);
+        int startIndex = mWorkspace.numCustomPages() + (Utilities.showQsbWidget(mContext)  ? 1 : 0);
         if (index > startIndex) {
             info.addAction(mActions.get(MOVE_BACKWARD));
         }

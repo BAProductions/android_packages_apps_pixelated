@@ -143,7 +143,7 @@ public class GridSizeMigrationTask {
     protected boolean migrateHotseat() throws Exception {
         ArrayList<DbEntry> items = loadHotseatEntries();
 
-        int requiredCount = FeatureFlags.NO_ALL_APPS_ICON ? mDestHotseatSize : mDestHotseatSize - 1;
+        int requiredCount = Utilities.showAllAppsIcon(mContext) ? mDestHotseatSize : mDestHotseatSize - 1;
 
         while (items.size() > requiredCount) {
             // Pick the center item by default.
@@ -175,7 +175,7 @@ public class GridSizeMigrationTask {
             }
 
             newScreenId++;
-            if (!FeatureFlags.NO_ALL_APPS_ICON && mIdp.isAllAppsButtonRank(newScreenId)) {
+            if (!Utilities.showAllAppsIcon(mContext) && mIdp.isAllAppsButtonRank(newScreenId)) {
                 newScreenId++;
             }
         }
@@ -261,7 +261,7 @@ public class GridSizeMigrationTask {
      */
     protected void migrateScreen(long screenId) {
         // If we are migrating the first screen, do not touch the first row.
-        int startY = (FeatureFlags.QSB_ON_FIRST_SCREEN && screenId == Workspace.FIRST_SCREEN_ID)
+        int startY = (Utilities.showQsbWidget(mContext) && screenId == Workspace.FIRST_SCREEN_ID)
                 ? 1 : 0;
 
         ArrayList<DbEntry> items = loadWorkspaceEntries(screenId);
@@ -376,7 +376,7 @@ public class GridSizeMigrationTask {
     private ArrayList<DbEntry> tryRemove(int col, int row, int startY,
             ArrayList<DbEntry> items, float[] outLoss) {
         GridOccupancy occupied = new GridOccupancy(mTrgX, mTrgY);
-        occupied.markCells(0, 0, mTrgX, startY, true);
+        occupied.markCells(0, 0, mTrgX, startY, Utilities.showQsbWidget(mContext));
 
         col = mShouldRemoveX ? col : Integer.MAX_VALUE;
         row = mShouldRemoveY ? row : Integer.MAX_VALUE;
