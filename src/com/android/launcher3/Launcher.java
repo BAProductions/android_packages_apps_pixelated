@@ -314,7 +314,7 @@ public class Launcher extends Activity
     private SharedPreferences mSharedPrefs;
 	@Thunk Launcher mLauncher;
 	public static Utilities mUtilities = new Utilities();
-
+	
     // Holds the page that we need to animate to, and the icon views that we need to animate up
     // when we scroll to that page on resume.
     @Thunk ImageView mFolderIconImageView;
@@ -380,7 +380,6 @@ public class Launcher extends Activity
     }
 
     private RotationPrefChangeHandler mRotationPrefChangeHandler;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (DEBUG_STRICT_MODE) {
@@ -424,7 +423,7 @@ public class Launcher extends Activity
         mDragController = new DragController(this);
         mAllAppsController = new AllAppsTransitionController(this);
         mStateTransitionAnimation = new LauncherStateTransitionAnimation(this, mAllAppsController);
-
+		
         mAppWidgetManager = AppWidgetManagerCompat.getInstance(this);
 
         mAppWidgetHost = new LauncherAppWidgetHost(this, APPWIDGET_HOST_ID);
@@ -491,7 +490,7 @@ public class Launcher extends Activity
         }
 		
     }
-
+	
     @Override
     public void onExtractedColorsChanged() {
         loadExtractedColorsAndColorItems();
@@ -743,7 +742,7 @@ public class Launcher extends Activity
             public void run() {
                 exitSpringLoadedDragModeDelayed((resultCode != RESULT_CANCELED),
                         EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT, null);
-				mModel.forceReload();
+				//mModel.forceReload();
             }
         };
 
@@ -1085,7 +1084,7 @@ public class Launcher extends Activity
             mLauncherCallbacks.onResume();
         }
 		
-		mModel.forceReload();
+		//mModel.forceReload();
     }
 
 	@Override
@@ -2478,7 +2477,7 @@ public class Launcher extends Activity
             if (v instanceof FolderIcon) {
                 onClickFolderIcon(v);
             }
-        } else if ((!Utilities.toggleAllAppsPullUp(this) && v instanceof PageIndicator) ||
+        } else if ((Utilities.toggleAllAppsPullUp(this) && v instanceof PageIndicator) ||
                 (v == mAllAppsButton && mAllAppsButton != null)) {
             onClickAllAppsButton(v);
         } else if (tag instanceof AppInfo) {
@@ -3153,7 +3152,7 @@ public class Launcher extends Activity
         if (isWorkspaceLocked()) return false;
         if (mState != State.WORKSPACE) return false;
 
-        if ((!Utilities.toggleAllAppsPullUp(this) && v instanceof PageIndicator) ||
+        if ((Utilities.toggleAllAppsPullUp(this) && v instanceof PageIndicator) ||
                 (v == mAllAppsButton && mAllAppsButton != null)) {
             onLongClickAllAppsButton(v);
             return true;
@@ -3197,7 +3196,7 @@ public class Launcher extends Activity
                 }
             } else {
                 final boolean isAllAppsButton =
-                        !Utilities.showAllAppsIcon(this) && isHotseatLayout(v) &&
+                        Utilities.showAllAppsIcon(this) && isHotseatLayout(v) &&
                                 mDeviceProfile.inv.isAllAppsButtonRank(mHotseat.getOrderInHotseat(
                                         longClickCellInfo.cellX, longClickCellInfo.cellY));
                 if (!(itemUnderLongClick instanceof Folder || isAllAppsButton)) {
@@ -3636,34 +3635,27 @@ public class Launcher extends Activity
             Trace.endSection();
         }
     }
-
-    @Override
+	
+	@Override
     public void bindScreens(ArrayList<Long> orderedScreenIds) {
-         // Make sure the first screen is always at the start.
+        // Make sure the first screen is always at the start.
         if (Utilities.showQsbWidget(this) &&
                 orderedScreenIds.indexOf(Workspace.FIRST_SCREEN_ID) != 0) {
-            orderedScreenIds.remove(Workspace.FIRST_SCREEN_ID);
-            orderedScreenIds.add(0, Workspace.FIRST_SCREEN_ID);
-             mModel.updateWorkspaceScreenOrder(this, orderedScreenIds);
+            //orderedScreenIds.remove(Workspace.FIRST_SCREEN_ID);
+            //orderedScreenIds.add(0, Workspace.FIRST_SCREEN_ID);
+            //mModel.updateWorkspaceScreenOrder(this, orderedScreenIds);
         } else if (!Utilities.showQsbWidget(this) && orderedScreenIds.isEmpty()) {
             // If there are no screens, we need to have an empty screen
-            mWorkspace.addExtraEmptyScreen();
+            //mWorkspace.addExtraEmptyScreen();
         }
         bindAddScreens(orderedScreenIds);
-
-        // Create the custom content page (this call updates mDefaultScreen which calls
-        // setCurrentPage() so ensure that all pages are added before calling this).
-        if (hasCustomContentToLeft()) {
-            mWorkspace.createCustomContentContainer();
-            populateCustomContentContainer();
-        }
 
         // After we have added all the screens, if the wallpaper was locked to the default state,
         // then notify to indicate that it can be released and a proper wallpaper offset can be
         // computed before the next layout
         mWorkspace.unlockWallpaperFromDefaultPageOnNextLayout();
     }
-
+	
     private void bindAddScreens(ArrayList<Long> orderedScreenIds) {
         int count = orderedScreenIds.size();
         for (int i = 0; i < count; i++) {

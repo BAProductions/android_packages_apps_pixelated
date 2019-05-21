@@ -588,11 +588,11 @@ public class Workspace extends PagedView
      * @param qsb an exisitng qsb to recycle or null.
      */
     public void bindAndInitFirstWorkspaceScreen(View qsb) {
-        if (!Utilities.showQsbWidget(getContext())) {
+       if (!Utilities.showQsbWidget(getContext())) {
             return;
         }
         // Add the first page
-        CellLayout firstPage = insertNewWorkspaceScreen(Workspace.FIRST_SCREEN_ID, 0);
+       CellLayout firstPage = insertNewWorkspaceScreen(Workspace.FIRST_SCREEN_ID, 0);
 	
         if (Utilities.togglePulldownSearch(getContext())) {
             firstPage.setOnTouchListener(new VerticalFlingDetector(mLauncher) {

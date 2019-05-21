@@ -61,8 +61,13 @@ import com.android.launcher3.util.LooperExecutor;
  */
 public class SettingsActivity extends Activity {
 	public static Launcher mLauncher;
+	
 	private static final long WAIT_BEFORE_RESTART = 250;
-				
+	
+	private static boolean mRestartNeeded;
+
+	private static final String TAG = "Settings Activity";
+	 			
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,8 +83,6 @@ public class SettingsActivity extends Activity {
     public static class LauncherSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
         private SystemDisplayRotationLockObserver mRotationLockObserver;
-
-    	private static boolean mRestartNeeded;
 	
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -113,13 +116,13 @@ public class SettingsActivity extends Activity {
 			* Disable PredictionsBug to avoid a huge bugs
 			*/
 			Preference predictionsPref = findPreference(Utilities.SHOW_PREDICTIONS_PREF);
-			// predictionsPref.setOnPreferenceChangeListener(this);
 			predictionsPref.setEnabled(false);
 			getPreferenceScreen().removePreference(predictionsPref);
 			
 			HomeKeyWatcher mHomeKeyListener = new HomeKeyWatcher(getActivity());
             mHomeKeyListener.setOnHomePressedListener(() -> {
                 if (mRestartNeeded) {
+					Utilities.logAllString(TAG,"Restarting Launcher3");
                     restart(getActivity());
                 }
             });
@@ -132,55 +135,77 @@ public class SettingsActivity extends Activity {
 			Preference showQSBPref = (SwitchPreference) findPreference(Utilities.SHOW_QSB);
 			showQSBPref.setEnabled(false);	
 			getPreferenceScreen().removePreference(showQSBPref);
+			/*showQSBPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {	
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object o) {
+					mRestartNeeded = true;
+					return true;
+				}
+			});*/
 			
             // Show App Search Preference
 			// Todo: Add Ability Hide App Search In App Drawer like in the LineageOS Default Launcher(Trebuchet)
 			Preference appSearchPref = (SwitchPreference) findPreference(Utilities.SHOW_APP_SEARCH);
 			appSearchPref.setEnabled(false);	
 			getPreferenceScreen().removePreference(appSearchPref);
+			/*appSearchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {	
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object o) {
+					mRestartNeeded = false;
+					return true;
+				}
+			});*/
 			
 			// Pinch To Overview Preference
 			// Todo: Add Ability to toggle pinch to overview
 			Preference PinchToOverviewPref = (SwitchPreference) findPreference(Utilities.PINCH_TO_OVERVIEW);
-			PinchToOverviewPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {	
+			PinchToOverviewPref.setEnabled(false);	
+			getPreferenceScreen().removePreference(PinchToOverviewPref);
+			/*PinchToOverviewPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {	
 				@Override
 				public boolean onPreferenceChange(Preference preference, Object o) {
-					mRestartNeeded = true;
+					mRestartNeeded = false;
 					return true;
 				}
-			});
+			});*/
 			
 			// Light Status Bar  Preference
 			// Todo: Add Ability to toggle between Light Statue Bar
 			Preference LighrStatusBarPref = (SwitchPreference) findPreference(Utilities.LIGHT_STATUS_BAR);
-			LighrStatusBarPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {	
+			LighrStatusBarPref.setEnabled(false);	
+			getPreferenceScreen().removePreference(LighrStatusBarPref);
+			/*LighrStatusBarPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {	
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object o) {
+					mRestartNeeded = false;
+					return true;
+				}
+			});*/
+						
+			//Pulldown Search
+			// Todo: Add Ability to toggle Pull Down Search Like Apple's iOS
+			Preference PulldownSearchPref = (SwitchPreference) findPreference(Utilities.PULLDOWN_SEARCH);
+			PulldownSearchPref.setEnabled(false);	
+			getPreferenceScreen().removePreference(PulldownSearchPref);
+			/*PulldownSearchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {	
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object o) {
+					mRestartNeeded = false;
+					return true;
+				}
+			});*/
+			
+			// Show All App Icon Like LineageOS Default Launcher(Trebuchet) look
+			Preference allAppsIconPref = (SwitchPreference) findPreference(Utilities.SHOW_ALL_APPS_ICON);
+			allAppsIconPref.setEnabled(false);	
+			getPreferenceScreen().removePreference(allAppsIconPref);
+			/*allAppsIconPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {	
 				@Override
 				public boolean onPreferenceChange(Preference preference, Object o) {
 					mRestartNeeded = true;
 					return true;
 				}
-			});
-			
-			//Pulldown Search
-			// Todo: Add Ability to toggle Pull Down Search Like Apple's iOS
-			Preference PulldownSearchPref = (SwitchPreference) findPreference(Utilities.PULLDOWN_SEARCH);
-			PulldownSearchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {	
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object o) {
-					mRestartNeeded = false;
-					return true;
-				}
-			});
-			
-			// Show All App Icon Like LineageOS Default Launcher(Trebuchet) look
-			Preference allAppsIconPref = (SwitchPreference) findPreference(Utilities.SHOW_ALL_APPS_ICON);
-			allAppsIconPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {	
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object o) {
-					mRestartNeeded = false;
-					return true;
-				}
-			});
+			});*/
 			
         }
 		

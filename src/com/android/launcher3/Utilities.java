@@ -189,13 +189,15 @@ public final class Utilities {
 	public static final String SHOW_ALL_APPS_PULL_UP = "pref_all_apps_pull_up";
 	
 	public static boolean toggleAllAppsPullUp(Context context) {
-         return getPrefs(context).getBoolean(SHOW_ALL_APPS_ICON, FeatureFlags.NO_ALL_APPS_ICON);
+         return FeatureFlags.NO_ALL_APPS_ICON; 
+		 //!getPrefs(context).getBoolean(SHOW_ALL_APPS_ICON, FeatureFlags.NO_ALL_APPS_ICON);
     }
 	
 	public static final String SHOW_ALL_APPS_ICON = "pref_show_all_apps_icon";
 	
 	public static boolean showAllAppsIcon(Context context) {
-         return !getPrefs(context).getBoolean(SHOW_ALL_APPS_ICON, FeatureFlags.NO_ALL_APPS_ICON);
+         return FeatureFlags.NO_ALL_APPS_ICON; 
+		 //!getPrefs(context).getBoolean(SHOW_ALL_APPS_ICON, FeatureFlags.NO_ALL_APPS_ICON);
     }
 	
 	// Show App Search Preference
@@ -203,7 +205,8 @@ public final class Utilities {
 	public static final String SHOW_APP_SEARCH = "pref_show_app_search";
 	
 	public static boolean showAppSearch(Context context) {
-         return getPrefs(context).getBoolean(SHOW_APP_SEARCH, true);
+         return true; 
+		 //getPrefs(context).getBoolean(SHOW_APP_SEARCH, true);
     }
 	
 	// Show Google Search Preference
@@ -211,9 +214,19 @@ public final class Utilities {
     public static final String SHOW_QSB = "pref_show_qsb";
 	
 	public static boolean showQsbWidget(Context context) {
-         return  FeatureFlags.QSB_ON_FIRST_SCREEN;
+         return FeatureFlags.QSB_ON_FIRST_SCREEN; 
 		 //getPrefs(context.getApplicationContext()).getBoolean(SHOW_QSB, FeatureFlags.QSB_ON_FIRST_SCREEN);
     }
+	
+	public static void logAllString(String tag, Object e) {
+		String strValueForE = e.toString();
+		Log.e("value:" + tag, "value:" + strValueForE);
+		Log.w("value:" + tag, "value:" + strValueForE);
+		Log.i("value:" + tag, "value:" + strValueForE);
+		Log.d("value:" + tag, "value:" + strValueForE);
+		Log.v("value:" + tag, "value:" + strValueForE);
+		Log.wtf("value:" + tag, "value:" + strValueForE);
+	}
 	
 	// Allow Rotation Preference
     public static final String ALLOW_ROTATION_PREFERENCE_KEY = "pref_allowRotation";

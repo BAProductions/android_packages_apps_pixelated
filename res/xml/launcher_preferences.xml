@@ -29,72 +29,71 @@
 		android:defaultValue="true"
 		android:persistent="true"
 	/>
+	<!-- Todo: Add Ability to swap toggle all apps icon for the oldschool Trebuchet launcher -->
+	<!-- Todo: Need Finishing -->
+	<SwitchPreference
+		android:key="pref_show_all_apps_icon"
+		android:title="@string/title_show_all_apps_icon"
+		android:summary="@string/summary_show_all_apps_icon"
+		android:defaultValue="false"
+		android:persistent="true"
+	/>
+	
+	<!-- Todo: Add Ability Hide Google Quick Search Bar like in the LineageOS Default Launcher(Trebuchet) -->
+	<!-- Todo: Need Fixing -->
+	<SwitchPreference
+		android:key="pref_show_qsb"
+		android:title="@string/title_show_qsb"
+		android:summary="@string/summary_show_qsb"
+		android:defaultValue="true"
+		android:persistent="true"
+	/>
+	
+	<!-- Todo: Add Ability Hide App Search In App Drawer like in the LineageOS Default Launcher(Trebuchet) -->
+	<!-- Todo: Need Fixing -->
+	<SwitchPreference
+		android:key="pref_show_app_search"
+		android:title="@string/title_show__app_search"
+		android:summary="@string/summary_show__app_search"
+		android:defaultValue="true"
+		android:persistent="true"
+	/>
+	
+	<!-- Todo: Add Ability to toggle pinch to overview -->
+	<!-- Todo: Need Fixing -->
+	<SwitchPreference
+		android:key="pref_pinch_to_overview"
+		android:title="@string/title_pinch_to_overview"
+		android:summary="@string/summary_pinch_to_overview"
+		android:defaultValue="false"
+		android:persistent="true"
+	/>
+	
+	<!-- odo: Add Ability to toggle between Light Statue Bar) -->
+	<!-- Todo: Need Fixing -->
+	<SwitchPreference
+		android:key="pref_light_status_bar"
+		android:title="@string/title_light_status_bar"
+		android:summary="@string/summary_light_status_bar"
+		android:defaultValue="true"
+		android:persistent="true"
+	/>
+	
+	<!-- Todo: Add Ability to toggle Pull Down Search Like Apple's iOS -->
+	<!-- Todo: Need Fixing -->
+	<SwitchPreference
+		android:key="pref_pulldown_search"
+		android:title="@string/title_pulldown_search"
+		android:summary="@string/summary_pulldown_search"
+		android:defaultValue="false"
+		android:persistent="true"
+	/>
 	
 	<PreferenceCategory android:title="@string/cat_look_feel_title">
 		<com.android.launcher3.preferences.IconPackPreference
 			android:key="pref_iconPackPackage"
 			android:title="@string/icon_pack"
 			android:summary="@string/icon_pack_summary"
-			android:persistent="true"
-		/>
-		
-		<!-- Todo: Add Ability to swap toggle all apps icon for the oldschool Trebuchet launcher -->
-		<!-- Todo: Need Finishing -->
-		<SwitchPreference
-			android:key="pref_show_all_apps_icon"
-			android:title="@string/title_show_all_apps_icon"
-			android:summary="@string/summary_show_all_apps_icon"
-			android:defaultValue="false"
-			android:persistent="true"
-		/>
-		
-		<!-- Todo: Add Ability Hide Google Quick Search Bar like in the LineageOS Default Launcher(Trebuchet) -->
-		<!-- Todo: Need Fixing -->
-		<SwitchPreference
-			android:key="pref_show_qsb"
-			android:title="@string/title_show_qsb"
-			android:summary="@string/summary_show_qsb"
-			android:defaultValue="true"
-			android:persistent="true"
-		/>
-		
-		<!-- Todo: Add Ability Hide App Search In App Drawer like in the LineageOS Default Launcher(Trebuchet) -->
-		<!-- Todo: Need Fixing -->
-		<SwitchPreference
-			android:key="pref_show_app_search"
-			android:title="@string/title_show__app_search"
-			android:summary="@string/summary_show__app_search"
-			android:defaultValue="true"
-			android:persistent="true"
-		/>
-		
-		<!-- Todo: Add Ability to toggle pinch to overview -->
-		<!-- Todo: Need Fixing -->
-		<SwitchPreference
-			android:key="pref_pinch_to_overview"
-			android:title="@string/title_pinch_to_overview"
-			android:summary="@string/summary_pinch_to_overview"
-			android:defaultValue="false"
-			android:persistent="true"
-		/>
-		
-		<!-- odo: Add Ability to toggle between Light Statue Bar) -->
-		<!-- Todo: Need Fixing -->
-		<SwitchPreference
-		android:key="pref_light_status_bar"
-			android:title="@string/title_light_status_bar"
-			android:summary="@string/summary_light_status_bar"
-			android:defaultValue="true"
-			android:persistent="true"
-		/>
-		
-		<!-- Todo: Add Ability to toggle Pull Down Search Like Apple's iOS -->
-		<!-- Todo: Need Fixing -->
-		<SwitchPreference
-			android:key="pref_pulldown_search"
-			android:title="@string/title_pulldown_search"
-			android:summary="@string/summary_pulldown_search"
-			android:defaultValue="false"
 			android:persistent="true"
 		/>
 		

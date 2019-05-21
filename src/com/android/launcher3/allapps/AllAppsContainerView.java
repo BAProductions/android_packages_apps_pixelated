@@ -185,7 +185,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
         mLayoutManager = mAdapter.getLayoutManager();
         mItemDecoration = mAdapter.getItemDecoration();
         DeviceProfile grid = mLauncher.getDeviceProfile();
-        if (Utilities.toggleAllAppsPullUp(context) && !grid.isVerticalBarLayout()) {
+        if (!Utilities.toggleAllAppsPullUp(context) && !grid.isVerticalBarLayout()) {
            mRecyclerViewBottomPadding =
                     res.getDimensionPixelSize(R.dimen.all_apps_list_bottom_padding);
         } else {

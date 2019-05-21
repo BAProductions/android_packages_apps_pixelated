@@ -175,7 +175,7 @@ public class GridSizeMigrationTask {
             }
 
             newScreenId++;
-            if (!Utilities.showAllAppsIcon(mContext) && mIdp.isAllAppsButtonRank(newScreenId)) {
+            if (Utilities.showAllAppsIcon(mContext) && mIdp.isAllAppsButtonRank(newScreenId)) {
                 newScreenId++;
             }
         }
@@ -263,7 +263,9 @@ public class GridSizeMigrationTask {
         // If we are migrating the first screen, do not touch the first row.
         int startY = (Utilities.showQsbWidget(mContext) && screenId == Workspace.FIRST_SCREEN_ID)
                 ? 1 : 0;
-
+		//Utilities.logAllString(TAG,startY);
+		//Utilities.logAllString(TAG,screenId);
+		//Utilities.logAllString(TAG, Workspace.FIRST_SCREEN_ID);
         ArrayList<DbEntry> items = loadWorkspaceEntries(screenId);
 
         int removedCol = Integer.MAX_VALUE;
@@ -377,7 +379,7 @@ public class GridSizeMigrationTask {
             ArrayList<DbEntry> items, float[] outLoss) {
         GridOccupancy occupied = new GridOccupancy(mTrgX, mTrgY);
         occupied.markCells(0, 0, mTrgX, startY, Utilities.showQsbWidget(mContext));
-
+		
         col = mShouldRemoveX ? col : Integer.MAX_VALUE;
         row = mShouldRemoveY ? row : Integer.MAX_VALUE;
 
